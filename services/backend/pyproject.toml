@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "encurtador-url"
+version = "0.1.0"
+description = "Encurtador de url"
+authors = ["Ricardo Gil <rikrdogil@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.74.0"
+tortoise-orm = "^0.17.6"
+aerich = "^0.5.5"
+asyncpg = "^0.23.0"
+bcrypt = "^3.2.0"
+passlib = "^1.7.4"
+uvicorn = "^0.14.0"
+python-jose = "^3.3.0"
+python-multipart = "^0.0.5"
+validators = "^0.18.2"
+shortuuid="^1.0.1"
+fastapi-pagination="^0.9.0"
+apscheduler="^3.9.1"
+
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+pytest-asyncio = "^0.18.0"
+pytest-cov = "^3.0"
+httpx = "^0.22.0"
+asgi-lifespan = "^1.0.1"
+
+[tool.isort]
+
+src_paths = ["src", "tests"]
+combine_as_imports = true
+
+
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+addopts = '''
+  --strict-markers
+  --tb=short
+  --asyncio-mode=auto
+  
+'''
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build: ./services/backend
+    ports:
+      - 8000:8000
+    environment:
+      - DATABASE_URL=postgres://encurtador_user:encurtador_user@db:5432/encurtador_dev
+      - SECRET_KEY=9e7ed9e0066a2af5970bfca444eab3526a627222e2738df860a10940dca32105
+      - BASE_URL=http://localhost/
+    volumes:
+      - ./services/backend:/app
+    command: uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+    depends_on:
+      - db
+
+  frontend2:
+    build: ./services/frontend2
+    volumes:
+      - './services/frontend2:/app'
+      - '/app/node_modules'
+    ports:
+      - 80:80
+
+  db:
+    image: postgres:13
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=encurtador_user
+      - POSTGRES_PASSWORD=encurtador_user
+      - POSTGRES_DB=encurtador_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
